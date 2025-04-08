@@ -1,0 +1,5 @@
+v=1.0 intende la versione del file css attuale, assieme ai vari aggiornamenti e modifiche nel codice
+
+il cache è un meccanismo usato dai browser dove le risorse web vengono salvate in locale evitando di doversi
+connettere di nuova al server per richiedere di nuovo la stessa risorsa
+

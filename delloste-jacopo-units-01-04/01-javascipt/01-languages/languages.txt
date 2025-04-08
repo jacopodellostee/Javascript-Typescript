@@ -1,0 +1,14 @@
+Linguaggi: C, C++, Java, JavaScript, Python, PHP, Rust, HTML, CSS, XML, XSD, MySQL, MATLAB, Ruby, Assembly
+
+Compilati: C, C++, Rust, MATLAB, MySQL
+
+Interpretati: Java, JavaScript, Python, PHP, Ruby
+
+Altri: HTML, CSS, XML, XSD
+
+C, C++, Rust, MATLAB: hanno il proprio compilatore da installare (es. MinGW per C) per poter runnuare il file eseguibile
+
+
+Java, JavaScript, Python, PHP, Ruby: hanno bisogno del proprio interprete (es. JVM per Java, NodeJS per JavaScript) per poter eseguire il codice
+
+HTML, CSS, XML, XSD, Assembly: non sono linguaggi di programmazione ma markup, CSS linguaggio di style sheet, Assembly è letteralmente il codice madre

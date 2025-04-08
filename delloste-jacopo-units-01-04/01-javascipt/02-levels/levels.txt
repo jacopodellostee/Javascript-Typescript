@@ -1,0 +1,58 @@
+Il Compilatore:
+    software che trasforma il codice in un file binario (linguaggio macchina) senza eseguirlo
+
+Il compilatore funziona secondo le seguenti istruzioni:
+- Creazione del codice: viene scitto il codice in un determinato linguaggio
+- Pre Elaborazione: il codice viene trasmesso al processore che lo espande, il quale verrà in seguito inviato al compilatore
+- Compilazione: il codice espanso viene trasformato in assembly
+- Conversione In Oggetto: un Assembler trasforma il mio codice assembly in un codice oggetto 
+- Linker: se un programma utilizza funzione presenti in altri file il Linker connette il codice oggetto della libreria al nostro codice oggetto
+- Eseguzione: il codice oggetto diventa un file eseguibile (file binario)
+
+Pro:
+    più veloce di un interprete
+    il client non ha bisogno del compilatore per runnare l'eseguibile
+    l'eseguibile può essere runnatto anche senza il codice sorgente rendendolo protetto e confidenziale 
+    il codice macchina è molto ottimizato per per la macchina su cui è compilato portando ad una esecuzione velocizata
+
+Contro:
+    dato che il codice è ottimizato per il sistema dove viene eseguito il programma, potrebbero esserci problemi di compatibilità
+    il compilatore in questo caso deve generare un nuovo file, consumando altra memoria
+    dopo aver sfogliato il codice ritorna tutti gli errori in un colpo, rendendo difficile localizzarli e corregerli
+    a differenza di un interprete, non possiamo runnare il codice direttamente, dobbiamo prima compilare ed eseguire il file eseguibile
+
+l'interprete:
+    software che converte ed esegue il codice linea per linea segnalando vari errori
+
+L'interprete funziona secondo le seguenti istruzioni:
+- Creazione Codice Sorgente: identica al compilatore, ma l'interprete trasforma il codice linea per linea 
+- Interpretazione Diretta: un interprete transforma un codice di alto livello in codice assembly
+- Editing del Codice Sorgente: l'interprete permette la valutazione e modifica dei tramite l'esecuzione in una finestra side-by-side
+- Esecuzione: rispetto ad un compilatore l'esecuzione e moderatamente più lenta in quanto il linking viene fatto all'instante e non con un linker separato
+
+
+Pro:
+    segnalando gli errori riga per riga, debuggare è più semplice
+    coloro con accesso al codice sorgente posso modificare facilmente il codice
+    il codice può essere condiviso ed eseguito su qualsiasi macchiana senza problemi di compatibilità
+    l'interprete non crea nuovi file, non consumando memoria
+    il codice sorgente è eseguito senza passagi aggiuntivi
+
+Contro:
+    se il codice è interrotto in qualsiasi punto, l'interprete ricomincia sempre da capo ogni volta che viene eseguito
+    l'interprete è più lento di un compilatore
+    un client ha bisogno in un interprete installato per poter eseguire il codice
+    per condividere il cofice con altri, uno deve condividere codici sorgenti non-sicuri e non-privati
+
+
+I linguaggi di programmazione sono suddivisi in vari livelli, detti "livelli d'astrazione", con astrazione intendiamo la vicinanza ad come ragiona un essere umano
+
+I Livelli sono i seguenti:
+    Linguaggio Macchiana: la "lingua nativa" del computer, le istruzioni sono scritte in binario, illegibile per noi umani
+    Linguaggio Assembly: rendono la lettura del codice macchina più facile per noi umani sostituendo instruzioni binarie con semplici abbrevazioni ma sono sempre difficili da comprendere 
+    Linguaggi Ad Alto Livello: sono linguaggi molto più simili all'inglese e cio rende per noi programmatori molto più facile ragionare come il linguaggio di programmazione
+
+più il livello di astrazione è alto, più si avvicina a come noi ragioniamo, per fare un esempio il linguaggio Assembly (codice) ha una lettura più comprensibile per noi umani rispetto al codice macchina (linguaggio macchina) 
+ma è una lettura molto più complicata di un codice C (linguaggio ad alto livello)
+
+
