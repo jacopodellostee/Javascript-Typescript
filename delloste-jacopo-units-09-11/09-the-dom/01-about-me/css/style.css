@@ -1,0 +1,21 @@
+/**
+* Add an external css file using Javascript
+*
+*   The external css file should make items with the .list-item class white, bold and with an
+*   orange background
+*/
+
+/**
+* list-item
+*
+* every list item of the unorderred list should have   
+* - the font color white
+* - the font weight is bold
+* - the background color should be orange
+*/
+
+.list-item  {
+    color: white;
+    font-weight: bold;
+    background-color: orange;
+}
