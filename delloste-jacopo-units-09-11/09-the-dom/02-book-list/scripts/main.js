@@ -28,7 +28,7 @@ let books = [
     {
         title: 'Monster',
         author: 'Naoki Urasawa',
-        alreadyRead: true,
+        alreadyRead: false,
         url: "img/monster-cover.jpg"
     }
 ];
@@ -44,6 +44,8 @@ body.appendChild(h1);
 books.forEach(book => {
 
     let ul = document.createElement("ul");
+
+    ul.classList.add("book");
 
     let title = document.createElement("li");
 
@@ -65,6 +67,12 @@ books.forEach(book => {
 
     body.appendChild(ul);
 
+    if(book.alreadyRead) {
+        ul.classList.add("read");
+    } else {
+        ul.classList.add("not-read");
+    }
+
     let cover = document.createElement("img");
 
     cover.src = book.url;
@@ -72,3 +80,15 @@ books.forEach(book => {
     body.appendChild(cover);
 
 });
+
+setTimeout(() => {
+
+    let link = document.createElement("link");
+
+    link.rel = "stylesheet";
+
+    link.href = "css/style.css";
+
+    document.head.appendChild(link);
+    
+}, 5000);
