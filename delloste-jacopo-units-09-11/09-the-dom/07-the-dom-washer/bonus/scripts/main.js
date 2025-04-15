@@ -1,25 +1,39 @@
 /**
  * @file: main.js
  * @author: Jacopo Dell'Oste
- * title
+ * The DOM Washer
  *
- * what this file do
+ * This file simulates a visual dishwasher system using the DOM and JavaScript.
+ * There are three stacks of dirty dishes and one stack of clean dishes.
+ * Each stack is visually rendered in the DOM as a list.
+ * 
+ * The system washes two dishes at a time from the dirty stacks and moves them to the clean stack.
+ * The washing process includes a randomized delay to simulate time passing.
+ * Each update re-renders the stack contents on the page.
  */
-
 
 let cleanDishes = [];
 
+/**
+ * Creates a new stack of dirty dishes with 5–14 randomly labeled dishes.
+ * Each dish is represented by a string like "#23".
+ * @returns {string[]} A randomly generated array of dish labels.
+ */
 function createDirtyStack() {
     return new Array(Math.floor(Math.random() * 10) + 5)
         .fill(null)
         .map(() => "#" + (Math.floor(Math.random() * 50) + 1));
 }
 
+// Initialize three dirty stacks
 let dirtyDishes1 = createDirtyStack();
 let dirtyDishes2 = createDirtyStack();
 let dirtyDishes3 = createDirtyStack();
 
-// Draw all stacks in the DOM
+/**
+ * Updates the DOM to reflect the current state of all stacks.
+ * Each stack is rendered in a separate HTML list identified by ID.
+ */
 function drawStacks() {
     const stackMap = {
         "dirty-stack-1": dirtyDishes1,
@@ -39,6 +53,10 @@ function drawStacks() {
     }
 }
 
+/**
+ * Washes up to two dishes from the dirty stacks (in order) and moves them to the clean stack.
+ * A console message logs which dishes are being washed.
+ */
 function washDish() {
     let washedCount = 0;
 
@@ -56,6 +74,12 @@ function washDish() {
     tryWashFrom(dirtyDishes3);
 }
 
+/**
+ * Runs the simulation:
+ * - Continues washing dishes until all dirty stacks are empty
+ * - Random delay between each washing cycle
+ * - Renders current state after each wash
+ */
 function runSimulation() {
     if (
         dirtyDishes1.length === 0 &&
@@ -70,9 +94,9 @@ function runSimulation() {
     washDish();
     drawStacks();
 
-    const delay = Math.floor(Math.random() * 1000) + 500;
+    const delay = Math.floor(Math.random() * 1000) + 500; // 500ms to 1500ms
     setTimeout(runSimulation, delay);
 }
 
-
+// Start the simulation
 runSimulation();
