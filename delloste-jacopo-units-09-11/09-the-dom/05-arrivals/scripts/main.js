@@ -17,6 +17,7 @@
 const flightTable = document.querySelector('tbody');
 
 let flights = [];
+
 let flightId = 1;
 
 const origins = ['Torino', 'Milano', 'Roma', 'Napoli', 'Palermo', 'Bologna', 'Firenze'];
@@ -34,9 +35,9 @@ function getRandomOrigin() {
  * @param {Date} [date=new Date()] Optional date object, defaults to now
  * @returns {string} Formatted time string
  */
-function getCurrentTimeStr(date = new Date()) {
-    return date.getHours().toString().padStart(2, '0') + ':' +
-           date.getMinutes().toString().padStart(2, '0');
+function getCurrentTimeStr() {
+    let date = new Date() 
+    return date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
 }
 
 /**
@@ -46,9 +47,12 @@ function getCurrentTimeStr(date = new Date()) {
  * - After 40s: DELAYED → ARRIVED
  * 
  * @param {Object} flight - The flight object to update
+ * @returns {void}
  */
 function advanceFlightStatus(flight) {
+
     const now = Date.now();
+
     const elapsed = (now - flight.createdAt) / 1000;
 
     switch (flight.status) {
@@ -71,7 +75,6 @@ function advanceFlightStatus(flight) {
             break;
 
         case 'ARRIVED':
-            // Flight is done updating
             break;
     }
 }
@@ -82,6 +85,7 @@ function advanceFlightStatus(flight) {
  * - Advances flight statuses
  * - Sorts flights by scheduled time
  * - Re-renders all rows in the table
+ * @returns {void}
  */
 function updateTable() {
     const now = Date.now();
@@ -116,9 +120,11 @@ function updateTable() {
     });
 }
 
+
 /**
  * Creates a new random flight and adds it to the flights array.
  * Flight starts in the "DEPARTING" state.
+ * @returns {void}
  */
 function createFlight() {
     const now = new Date();

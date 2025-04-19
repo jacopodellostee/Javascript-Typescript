@@ -31,7 +31,9 @@ document.body.innerHTML = document.body.innerHTML.replace(/Stanford/g, "Berkeley
  * Stanford uses shades of red, while Berkeley uses navy blue and gold.
  */
 const stanfordColors = ["#8C1515", "#820000"];
+
 const berkeleyBlue = "#003262";
+
 const berkeleyGold = "#FDB515";
 
 /**
@@ -39,6 +41,7 @@ const berkeleyGold = "#FDB515";
  * with Berkeley colors for both text color and background color.
  */
 document.querySelectorAll("*").forEach(el => {
+
   const styles = window.getComputedStyle(el);
 
   // Replace text color if it matches Stanford's palette
@@ -48,6 +51,7 @@ document.querySelectorAll("*").forEach(el => {
 
   // Replace background color if it matches Stanford's palette
   if (stanfordColors.includes(styles.backgroundColor)) {
+    
     el.style.backgroundColor = berkeleyGold;
   }
 });
@@ -60,10 +64,16 @@ document.querySelectorAll("nav a").forEach(link => {
   const href = link.getAttribute("href");
 
   if (href.includes("admissions")) {
+
     link.href = "https://www.berkeley.edu/admissions";
+
   } else if (href.includes("research")) {
+
     link.href = "https://www.berkeley.edu/research";
+
   } else {
+
     link.href = "https://www.berkeley.edu";
+
   }
 });

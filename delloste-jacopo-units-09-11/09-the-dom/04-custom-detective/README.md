@@ -14,7 +14,7 @@
 
 So let's begin by searching for the main tags used:
 
-##  `div`
+##  Div
 
 To get all the divs, we use the following command:
 
@@ -30,7 +30,7 @@ NodeList(365) [div#__nuxt, div.nuxt-loading-indicator, div.logo-news.logo-mobil
 
 As we can see, we got 365 `div` elements across the website, a very large number, which is easy to notice by inspecting the site, as almost every block is a `div`.
 
-##  `img`
+##  Img
 
 As a video game news site, it displays images of all the new titles coming out, so to view them we use the following command:
 
@@ -46,7 +46,7 @@ NodeList(46) [img, img, img, img, img, img, img, img.youtube-play, img, img.you
 
 We can see that there are 46 images, one for each news post.
 
-##  `a`
+##  a
 
 As a news site, it shows links to news articles. So to view the links we use the following command:
 
