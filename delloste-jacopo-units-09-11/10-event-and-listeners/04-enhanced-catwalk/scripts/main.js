@@ -16,6 +16,7 @@ let faster = document.getElementById("faster");
 
 let slower = document.getElementById("slower");
 
+let stop = document.getElementById("stop");
 
 let position = 0;
 
@@ -47,28 +48,58 @@ function catWalk() {
 }
 
 function showInfo() {
-    info.textContent = `The cat is going at speed: ${speed}`;
+    
+    info.textContent = `The cat is going at a speed of ${speed}`;
 }
 
 function goFaster() {
+
     speed += 5;
+
     showInfo();
 }
 
 function goSlower() {
+
     if (speed > 1) 
-        speed -= 5
-    ;
+        speed -= 5;
+
     showInfo();
 }
 
+stop.addEventListener('click', () => {
+
+    clearInterval(catInterval);
+
+    catInterval = null;
+
+    stop.disabled = true;
+
+    faster.disabled = true;
+
+    slower.disabled = true;
+
+    start.disabled = false;
+
+})
+
 start.addEventListener('click', () => {
     if (!catInterval) {
+
         catInterval = setInterval(catWalk, 50);
+
+        start.disabled = true;
+
+        faster.disabled = false;
+
+        slower.disabled = false;
+
+        stop.disabled = false;
     }
 });
 
 faster.addEventListener('click', goFaster);
+
 slower.addEventListener('click', goSlower);
 
 window.onload = showInfo;
