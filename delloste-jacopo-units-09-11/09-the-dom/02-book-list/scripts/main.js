@@ -1,21 +1,33 @@
 /**
- * @file: main.js
- * @author: Jacopo Dell'Oste
- * Book List 
- *
- * This file dynamically creates and displays a list of books on a web page.
- * Each book is shown with its title, author, read status, and cover image.
- * Books that are already read are styled differently from those that are not.
- * A CSS file is also loaded dynamically after a short delay.
+ * @file main.js
+ * @author Jacopo Dell'Oste
+ * @description
+ * Book List Renderer
+ * 
+ * Dynamically creates and displays a list of books on a web page.
+ * Each book is represented with its title, author, read status, and cover image.
+ * Books that have already been read receive special styling.
+ * An external CSS file is also dynamically loaded after a short delay.
  */
 
+// === Book Data ===
+
+/**
+ * @typedef {Object} Book
+ * @property {string} title - The title of the book
+ * @property {string} author - The author of the book
+ * @property {boolean} alreadyRead - Indicates if the book has been read
+ * @property {string} url - The path to the book cover image
+ */
+
+/** @type {Book[]} List of books to display */
 let books = [
     {
         title: 'Oyasumi Punpun',
         author: 'Inio Asano',
         alreadyRead: true,
         url: "img/oyasumi-punpun-cover.jpg"
-    }, 
+    },
     {
         title: 'Solanin',
         author: 'Inio Asano',
@@ -27,7 +39,7 @@ let books = [
         author: 'Naoki Urasawa',
         alreadyRead: true,
         url: "img/20th-century-boys-cover.jpg"
-    }, 
+    },
     {
         title: 'Monster',
         author: 'Naoki Urasawa',
@@ -36,55 +48,61 @@ let books = [
     }
 ];
 
+// === Page Construction ===
+
+/** @type {HTMLBodyElement} Main body of the document */
 let body = document.body;
 
-// Create and add the main heading
+/** @type {HTMLHeadingElement} Heading for the book list */
 let h1 = document.createElement("h1");
 
 h1.textContent = "My Book List";
 
 body.appendChild(h1);
 
-// Loop through the books array and render each book
-books.forEach(book => {
+// === Render Each Book ===
 
-    // Create a <ul> for each book
+books.forEach(book => {
+    /** @type {HTMLUListElement} List container for book details */
+
     let ul = document.createElement("ul");
 
     ul.classList.add("book");
 
-    // Title item
+    // --- Title ---
+    /** @type {HTMLLIElement} Book title */
+
     let title = document.createElement("li");
 
     title.textContent = book.title;
 
     ul.appendChild(title);
 
-    // Author item
+    // --- Author ---
+    /** @type {HTMLLIElement} Book author */
     let author = document.createElement("li");
 
     author.textContent = book.author;
-    
+
     ul.appendChild(author);
 
-    // Read status item
+    // --- Read Status ---
+    /** @type {HTMLLIElement} Book read status */
     let alreadyRead = document.createElement("li");
 
     alreadyRead.textContent = book.alreadyRead ? "Already read" : "Not read yet";
 
     ul.appendChild(alreadyRead);
 
-    // Append the book list to the body
+    // Add class depending on read status
+
+    book.alreadyRead ? ul.classList.add("read"): ul.classList.add("not-read");
+    
+    // Append the book list to the document body
     body.appendChild(ul);
 
-    // Add class depending on read status for styling
-    if (book.alreadyRead) {
-        ul.classList.add("read");
-    } else {
-        ul.classList.add("not-read");
-    }
-
-    // Add the book cover image
+    // --- Cover Image ---
+    /** @type {HTMLImageElement} Book cover image */
     let cover = document.createElement("img");
 
     cover.src = book.url;
@@ -92,12 +110,15 @@ books.forEach(book => {
     cover.alt = `${book.title} cover`;
 
     body.appendChild(cover);
-
 });
 
-// Dynamically load CSS after 5 seconds
-setTimeout(() => {
+// === Load External CSS ===
 
+/**
+ * Dynamically loads external stylesheet after 5 seconds
+ */
+setTimeout(() => {
+    /** @type {HTMLLinkElement} Stylesheet link element */
     let link = document.createElement("link");
 
     link.rel = "stylesheet";
@@ -105,5 +126,4 @@ setTimeout(() => {
     link.href = "css/style.css";
 
     document.head.appendChild(link);
-
 }, 5000);

@@ -49,7 +49,6 @@ let solution = document.getElementById("solution");
  * @returns {string} A string with the result of the operation.
  */
 function squareNumber(number) {
-
     let power = number * number;
 
     return `The result of squaring the number ${number} is ${power} `;
@@ -62,7 +61,6 @@ function squareNumber(number) {
  * @returns {string} A string with the result of the operation.
  */
 function halfNumber(number) {
-
     let half = number / 2;
 
     return `Half of number ${number} is ${half}`;
@@ -76,22 +74,18 @@ function halfNumber(number) {
  * @returns {string} A string describing the percentage.
  */
 function percentOf(firstNumber, secondNumber) {
-
     let percentage = firstNumber * 100 / secondNumber;
 
     return `${firstNumber} is ${percentage}% of ${secondNumber}`;
-
 }
 
 /**
- * Calculates the area of a circle using the formula A = 2 * π * r.
- * (Note: this is technically the circumference, not the area).
+ * Calculates the area of a circle using the formula A = π * r^2.
  *
  * @param {number} radius - The radius of the circle.
  * @returns {string} A string with the computed area.
  */
 function areaOfCircle(radius) {
-
     let area = radius * radius * Math.PI;
 
     return `The area for a circle with radius ${radius} is ${area.toFixed(2)}`;
@@ -105,41 +99,77 @@ function areaOfCircle(radius) {
  * @returns {void}
  */
 function executeFunction(func, number) {
-
     solution.textContent = func(number);
 }
 
-// Event listener for squaring a number
-document.getElementById("square-button").addEventListener('click', () => {
+/**
+ * Input element for square calculation.
+ * @type {HTMLElement}
+ */
+let squareNumberInput = document.getElementById("square-input");
 
+// Event listener for squaring a number
+squareNumberInput.addEventListener('keypress', () => {
     let value = Number(document.getElementById("square-input").value);
 
     executeFunction(squareNumber, value);
 });
 
-// Event listener for halving a number
-document.getElementById("half-button").addEventListener('click', () => {
+/**
+ * Input element for halving a number.
+ * @type {HTMLElement}
+ */
+let halfNumberInput = document.getElementById("half-input");
 
+// Event listener for halving a number
+halfNumberInput.addEventListener('keypress', () => {
     let value = Number(document.getElementById("half-input").value);
 
     executeFunction(halfNumber, value);
 });
 
-// Event listener for calculating percentage
-document.getElementById("percent-button").addEventListener('click', () => {
+/**
+ * Input element for the first number in percentage calculation.
+ * @type {HTMLElement}
+ */
+let percentFirstInput = document.getElementById("percent-first-input");
 
-    let val1 = Number(document.getElementById("percent-first-input").value);
+/**
+ * Input element for the second number in percentage calculation.
+ * @type {HTMLElement}
+ */
+let percentSecondInput = document.getElementById("percent-second-input");
 
-    let val2 = Number(document.getElementById("percent-second-input").value);
+/**
+ * Handles Enter keypress on percentage inputs and displays the result.
+ *
+ * @param {KeyboardEvent} e - The keyboard event object.
+ * @returns {void}
+ */
+function handlePercentKeypress(e) {
+    if (e.key === "Enter") {
+        let val1 = Number(percentFirstInput.value);
 
-    solution.textContent = percentOf(val1, val2);
-});
+        let val2 = Number(percentSecondInput.value);
+
+        solution.textContent = percentOf(val1, val2);
+    }
+}
+
+// Event listener for calculating the percentage of two number
+percentFirstInput.addEventListener('keypress', handlePercentKeypress);
+
+percentSecondInput.addEventListener('keypress', handlePercentKeypress);
+
+/**
+ * Input element for circle area calculation.
+ * @type {HTMLElement}
+ */
+let areaCircleInput = document.getElementById("area-input");
 
 // Event listener for calculating area of a circle
-document.getElementById("area-button").addEventListener('click', () => {
-
+areaCircleInput.addEventListener('keypress', () => {
     let value = Number(document.getElementById("area-input").value);
-    
     executeFunction(areaOfCircle, value);
 });
 </code></pre>
@@ -152,13 +182,13 @@ document.getElementById("area-button").addEventListener('click', () => {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#areaOfCircle">areaOfCircle</a></li><li><a href="global.html#executeFunction">executeFunction</a></li><li><a href="global.html#halfNumber">halfNumber</a></li><li><a href="global.html#percentOf">percentOf</a></li><li><a href="global.html#solution">solution</a></li><li><a href="global.html#squareNumber">squareNumber</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#areaCircleInput">areaCircleInput</a></li><li><a href="global.html#areaOfCircle">areaOfCircle</a></li><li><a href="global.html#executeFunction">executeFunction</a></li><li><a href="global.html#halfNumber">halfNumber</a></li><li><a href="global.html#halfNumberInput">halfNumberInput</a></li><li><a href="global.html#handlePercentKeypress">handlePercentKeypress</a></li><li><a href="global.html#percentFirstInput">percentFirstInput</a></li><li><a href="global.html#percentOf">percentOf</a></li><li><a href="global.html#percentSecondInput">percentSecondInput</a></li><li><a href="global.html#solution">solution</a></li><li><a href="global.html#squareNumber">squareNumber</a></li><li><a href="global.html#squareNumberInput">squareNumberInput</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Apr 29 2025 14:12:02 GMT+0200 (Ora legale dell’Europa centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu May 01 2025 15:44:24 GMT+0200 (Ora legale dell’Europa centrale)
 </footer>
 
 <script> prettyPrint(); </script>

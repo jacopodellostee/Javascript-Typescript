@@ -1,44 +1,63 @@
+/**
+ * style.css
+ *
+ * This stylesheet defines the layout and visual appearance of the Airport Arrivals page.
+ * It provides formatting for the arrivals table, including header styles, data alignment,
+ * and flight status color coding for real-time updates.
+ */
+
+/* Base body styling for overall layout and readability */
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
     background-color: #f5f5f5;
 }
 
+/* Main heading style for page title */
 h1 {
     color: #333;
 }
 
+/* Styling for the flight arrivals table */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow for subtle elevation */
 }
 
+/* Common cell styles: padding, border, and center alignment */
 th, td {
     padding: 12px;
     border: 1px solid #ccc;
     text-align: center;
 }
 
+/* Light background for table headers for better visibility */
 th {
     background-color: #eaeaea;
 }
 
+/* === Flight Status Color Coding === */
+
+/* Red color and bold text for delayed flights */
 .status-delayed {
     color: red;
     font-weight: bold;
 }
 
+/* Green color for flights that have arrived */
 .status-arrived {
     color: green;
 }
 
+/* Blue color for flights that are on time */
 .status-on_time {
     color: blue;
 }
 
+/* Orange color for departing flights */
 .status-departing {
     color: orange;
 }

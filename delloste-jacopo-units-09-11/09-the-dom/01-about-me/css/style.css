@@ -1,20 +1,16 @@
 /**
-* Add an external css file using Javascript
-*
-*   The external css file should make items with the .list-item class white, bold and with an
-*   orange background
-*/
-
-/**
-* list-item
-*
-* every list item of the unorderred list should have   
-* - the font color white
-* - the font weight is bold
-* - the background color should be orange
-*/
-
-.list-item  {
+ * === List Item Styling ===
+ * 
+ * Styles all <li> elements that are dynamically given the "list-item" class
+ * via JavaScript in the About Me page. This improves readability and adds
+ * a visually distinct appearance to user-specific content such as nickname,
+ * favorites, and hometown.
+ * 
+ * - White text for high contrast
+ * - Bold font for emphasis
+ * - Bright orange background for a friendly, vibrant look
+ */
+ .list-item {
     color: white;
     font-weight: bold;
     background-color: orange;

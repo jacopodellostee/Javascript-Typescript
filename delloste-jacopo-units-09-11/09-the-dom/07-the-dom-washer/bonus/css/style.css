@@ -1,3 +1,13 @@
+/**
+ * style.css
+ *
+ * This stylesheet defines the layout and visual design for "The DOM Washer" page.
+ * It organizes multiple dish stacks in a responsive grid and provides visual cues
+ * for clean vs. dirty dishes. Each stack is rendered as a styled box with a list
+ * of dish items. Clean dishes are highlighted with a distinct background color.
+ */
+
+/* Base page styling for layout and readability */
 body {
   font-family: Arial, sans-serif;
   background-color: #eef2f5;
@@ -5,39 +15,44 @@ body {
   padding: 2rem;
 }
 
+/* Page title spacing */
 h1 {
   margin-bottom: 2rem;
 }
 
+/* Flex layout for all dish stacks */
 .stacks {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 2rem; /* Space between stacks */
 }
 
+/* Individual stack box styling */
 .stack {
   border: 2px solid #ccc;
   padding: 1rem;
   width: 200px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* Subtle shadow for elevation */
 }
 
+/* Highlight for clean dishes stack */
 .stack.clean {
-  background-color: #e0ffe0;
+  background-color: #e0ffe0; /* Light green to signify cleanliness */
 }
 
+/* Reset list styles for dish lists */
 ul {
   list-style: none;
   padding: 0;
 }
 
+/* Individual dish item styling */
 li {
   padding: 6px;
   margin: 4px 0;
-  background-color: #dde;
+  background-color: #dde; /* Light blue-gray for visual consistency */
   border-radius: 4px;
 }
-

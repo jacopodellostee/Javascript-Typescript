@@ -1,4 +1,4 @@
-# 
+# Story
 
 **Author**: Jacopo Dell'Oste 
 
@@ -6,15 +6,43 @@
 
 **Task**: 
 
+Start with the following HTML:
+
+```html
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Story</title>
+    </head>
+    <body>
+        <h1>Story</h1>
+    
+        <ul>
+            <li>Noun: <input type="text" id="noun"></li>
+            <li>Adjective: <input type="text" id="adjective"></li>
+            <li>Someone's Name: <input type="text" id="person"></li>
+        </ul>
+
+        <button id="gen-button">Lib it!</button>
+
+        <div id="story"></div>
+    </body>
+    </html>
+```
+
+- Add an event listener to the button so that it calls a makeStory function when clicked.
+
+- In the makeStory function, retrieve the current values of the form input elements, make a story from them, and output that in the story div (like "Joseph really likes pink cucumbers.")
 
 
 ### Solution Step-by-Step
 
-1. Create the  `` folder
+1. Create the  `01-story` folder
 
 2. Create the the `index.html` and `main.js` files in the appropriate directories
 
-    * the `index.html` file will be in the `` directory
+    * the `index.html` file will be in the `01-story` directory
 
     * the `main.js` file will be in a directory called `scripts` containing only JavaScript scripts
 
@@ -23,7 +51,31 @@
     * The HTML code:
 
     ```HTML 
-    
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Story</title>
+    </head>
+    <body>
+        <!-- Content Of The Body -->
+        <h1>Story</h1>
+        
+        <ul>
+            <li>Noun: <input type="text" id="noun"></li>
+            <li>Adjective: <input type="text" id="adjective"></li>
+            <li>Someone's Name: <input type="text" id="person"></li>
+        </ul>
+
+        <button id="gen-button">Lib it!</button>
+
+        <div id="story"></div>
+
+        <!-- End of The Body -->
+        <script src="./scripts/main.js"></script>
+
+    </body>
+    </html>
     ```
 
 4. Write the script  

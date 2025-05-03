@@ -1,5 +1,14 @@
+/**
+ * style.css
+ * 
+ * This stylesheet positions the cat image absolutely on the page using its ID selector.
+ * The image is aligned to the left edge of the screen and offset 0 pixels from the top.
+ * This setup allows the JavaScript logic to move the cat horizontally across the screen
+ * while preserving its vertical alignment.
+ */
+
+/* Positions the cat image absolutely for horizontal movement */
 #cat {
     position: absolute;
     left: 0;
 }
-

@@ -1,3 +1,12 @@
+/**
+ * style.css
+ *  
+ * This stylesheet positions the cat image absolutely on the page so it can
+ * be animated across the screen using JavaScript. The cat starts at the
+ * left edge and walks rightward, resetting when it reaches the end of the viewport.
+ */
+
+/* Positions all images absolutely to allow movement across the screen */
 img {
     position: absolute;
     left: 0;

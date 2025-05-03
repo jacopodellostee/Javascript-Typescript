@@ -1,14 +1,36 @@
-.book {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px;
+/**
+ * style.css
+ *
+ * Defines the layout and appearance of the dynamically rendered book list.
+ * Provides styling for each book block, including differentiation for read and unread books.
+ * Font and color choices enhance readability and user experience.
+ */
+
+/* === Book List Styling === */
+
+/* 
+ * Base styling for each book entry.
+ * Uses a serif font for a traditional literary look, bold text for emphasis, and padding for spacing.
+ */
+ .book {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
 }
 
+/*
+* Style for books that have already been read.
+* Green color indicates completion.
+*/
 .read {
-    color: rgb(16, 204, 16);
+  color: rgb(16, 204, 16);
 }
 
+/*
+* Style for books that have not yet been read.
+* Red color draws attention to unread status.
+*/
 .not-read {
-  color: red;  
+  color: red;
 }

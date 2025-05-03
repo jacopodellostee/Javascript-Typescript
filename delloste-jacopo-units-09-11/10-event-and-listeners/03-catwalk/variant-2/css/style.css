@@ -1,4 +1,12 @@
+/**
+ * style.css
+ *
+ * This stylesheet disables pointer events on the cat image to ensure it doesn't
+ * interfere with mouse interactions or block elements underneath. This is useful
+ * during animation to allow smooth bouncing and visual flipping controlled by JavaScript.
+ */
+
+/* Disables mouse interactions on the image (e.g., clicks, drags) */
 img {
     pointer-events: none;
 }
-  

@@ -1,3 +1,13 @@
+/**
+ * style.css
+ *
+ * This stylesheet positions the cat image absolutely on the page at a fixed vertical
+ * offset (100px from the top) to allow consistent animation across the screen.
+ * The cat starts at the left edge and walks horizontally back and forth.
+ * Additional JavaScript logic handles pausing in the center and switching animations.
+ */
+
+/* Positions the cat image absolutely and offsets it from the top */
 img {
     position: absolute;
     left: 0;
