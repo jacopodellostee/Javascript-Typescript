@@ -1,0 +1,76 @@
+[
+    {
+        "id": 1,
+        "brand": "Citroen",
+        "model": "C3 Picasso",
+        "yearOfRegistration": 2012,
+        "automatic": false,
+        "optional": ["LED headlights", "Cruise Control", "Air Conditioning"],
+        "engine": {
+            "type": "diesel",
+            "horsePower": 95,
+            "emmissionStandard": "Euro 5"
+        },
+        "owner": null
+    },
+
+    {
+        "id": 2,
+        "brand": "Peugeot",
+        "model": "207",
+        "yearOfRegistration": 2002,
+        "automatic": false,
+        "optional": null,
+        "engine": {
+            "type": "gasoline",
+            "horsePower": 75,
+            "emmissionStandard": "Euro 4"
+        },
+        "owner": ["Jacopo Dell'Oste", "Sandro Dell'Oste"]
+    },
+
+    {
+        "id": 3,
+        "brand": "KIA",
+        "model": "Stonic",
+        "yearOfRegistration": 2024,
+        "automatic": true,
+        "optional": ["LED headlights", "Adaptive Cruise Control", "Air Conditioning", "Start and Stop", "Reverse Camera"],
+        "engine": {
+            "type": "gasoline",
+            "horsePower": 115,
+            "emmissionStandard": "Euro 6E"
+        },
+        "owner": null
+    },
+
+    {
+        "id": 4,
+        "brand": "Volkswagen",
+        "model": "Golf 8",
+        "yearOfRegistration": 2021,
+        "automatic": true,
+        "optional": ["LED Matrix headlights", "Keyless Entry", "Heated Seats", "Digital Cockpit"],
+        "engine": {
+            "type": "mild hybrid",
+            "horsePower": 150,
+            "emmissionStandard": "Euro 6D"
+        },
+        "owner": null
+    },
+    
+    {
+        "id": 5,
+        "brand": "Fiat",
+        "model": "500e",
+        "yearOfRegistration": 2023,
+        "automatic": true,
+        "optional": ["Panoramic Roof", "Wireless Apple CarPlay", "Fast Charging", "Lane Assist"],
+        "engine": {
+            "type": "electric",
+            "horsePower": 118,
+            "emmissionStandard": "Zero Emissions"
+        },
+        "owner": null
+    }
+]

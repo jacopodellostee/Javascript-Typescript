@@ -1,0 +1,11 @@
+ul.carList {
+    list-style-type: none;
+}
+
+li.carItem {
+    margin-bottom: 1rem;
+}
+
+li > ul {
+    list-style-type: none; 
+}

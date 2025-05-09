@@ -1,0 +1,13 @@
+{
+    "brand": "Citroen",
+    "model": "C3 Picasso",
+    "yearOfRegistration": 2012,
+    "automatic": false,
+    "optional": ["LED headlights", "Cruise Control", "Air Conditioning"],
+    "engine": {
+        "type": "diesel",
+        "horsePower": 95,
+        "emmissionStandard": "Euro 5"
+    },
+    "owner": null
+}
