@@ -1,0 +1,20 @@
+input {
+    width: 150px;
+}
+
+ul, li {
+    list-style-type: none;
+}
+
+.content {
+    display: none;
+}
+
+.carsWrapper, .formEdit {
+    display: flex;
+    flex-direction: column;
+}
+
+.collapsible {
+    padding: 1rem;
+}
