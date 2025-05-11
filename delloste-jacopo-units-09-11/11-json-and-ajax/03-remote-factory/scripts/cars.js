@@ -20,22 +20,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createCollapsible(label) {
         const a = document.createElement("a");
+
         a.href = "#";
+
         a.classList.add("collapsible");
+
         a.textContent = label;
+
         return a;
     }
 
     function createContent() {
         const div = document.createElement("div");
+
         div.classList.add("content");
+
         div.style.display = "none";
+
         return div;
     }
 
     function createLi(text) {
         const li = document.createElement("li");
+
         li.textContent = text;
+
         return li;
     }
 
@@ -45,56 +54,85 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function createLabel(input, text) {
         let label = document.createElement("label");
+
         label.htmlFor = input.id;  
+
         label.textContent = text;  
+
         return label;
     }
     
     function createInput(name, type) {
         let input = document.createElement("input");
+
         input.type = type;
+
         input.id = name;
+
         return input;
     }
 
     function createFormEdit(car) {
         let form = document.createElement("form");
+
         form.classList.add("formEdit");
+
+
+        let h3 = document.createElement("h3");
+
+        h3.textContent = "Car Modification Form";
     
-        // Campi già esistenti
+
         let brand = createInput("brand", "text");
+
         let brandLabel = createLabel(brand, "Brand:");
+
     
         let model = createInput("model", "text");
+
         let modelLabel = createLabel(model, "Model:");
+
     
         let yearOfRegistration = createInput("yearOfRegistration", "number");
+
         let yearOfRegistrationLabel = createLabel(yearOfRegistration, "Year of Registration:");
+
     
         let automatic = createInput("automatic", "checkbox");
+
         let automaticLabel = createLabel(automatic, "Automatic:");
     
-        // 
+
         let optional = createInput("optional", "text");
+
         optional.value = Array.isArray(car.optional) ? car.optional.join(", ") : "";
+        
         let optionalLabel = createLabel(optional, "Optional (comma-separated):");
     
 
         let engineType = createInput("engineType", "text");
+
         engineType.value = car.engine?.type || "";
+
         let engineTypeLabel = createLabel(engineType, "Engine Type:");
     
         let horsePower = createInput("horsePower", "number");
+
         horsePower.value = car.engine?.horsePower || "";
+
         let horsePowerLabel = createLabel(horsePower, "Horse Power:");
     
         let emissionStandard = createInput("emmissionStandard", "text");
+
         emissionStandard.value = car.engine?.emmissionStandard || "";
+
         let emissionStandardLabel = createLabel(emissionStandard, "Emission Standard:");
+
     
         let submit = createInput("submit", "submit");
     
         form.append(
+            h3,
             brandLabel, brand,
             modelLabel, model,
             yearOfRegistrationLabel, yearOfRegistration,
@@ -109,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return form;
     }
 
-    // needed for make cars visible to other file (cars-edit.js)
+    // it's used to make the 'cars' array accessible to other files (cars-edit.js)
     window.cars = [];    
 
     request.onload = function () {
