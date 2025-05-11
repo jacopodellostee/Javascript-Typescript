@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
      */
     const request = new XMLHttpRequest();
 
-    request.open('GET', carsEndpoint, true);
+    request.open('GET', carsEndpoint);
 
     request.setRequestHeader('Content-type', 'application/json');
 

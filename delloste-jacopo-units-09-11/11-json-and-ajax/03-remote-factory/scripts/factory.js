@@ -28,7 +28,7 @@ const request = new XMLHttpRequest();
 const factoryEndpoint = "https://jsonblob.com/api/jsonBlob/1370458495740207104";
 
 // Open a GET request to the endpoint
-request.open('GET', factoryEndpoint, true);
+request.open('GET', factoryEndpoint);
 
 // Set content type to JSON
 request.setRequestHeader('Content-type', 'application/json');

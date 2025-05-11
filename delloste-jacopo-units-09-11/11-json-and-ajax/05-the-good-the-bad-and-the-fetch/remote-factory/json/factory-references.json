@@ -1,0 +1,13 @@
+{
+    "name": "GO Motori",
+    "yearOfFoundation": 1990,
+    "acceptsBankTransfers": true,
+    "employees": ["Beppe", "Lucia", "Marco"],
+    "address": {
+        "streetName": "SP50",
+        "houseNumber": 13,
+        "CAP": 15033
+    },
+    "website": null,
+    "carsId": [1, 2, 3, 4, 5]
+}

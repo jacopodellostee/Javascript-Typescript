@@ -1,0 +1,22 @@
+/**
+ * style.css
+ * 
+ * This stylesheet defines the layout and appearance of car data rendered by the script.
+ * It removes bullet points from car lists, adds spacing between individual cars,
+ * and ensures nested lists are clean and uniformly styled.
+ */
+
+/* Removes bullet points from car detail lists */
+ul.carList {
+    list-style-type: none;
+}
+
+/* Adds vertical spacing between car items */
+li.carItem {
+    margin-bottom: 1rem;
+}
+
+/* Removes bullet points from any nested lists inside list items */
+li > ul {
+    list-style-type: none; 
+}

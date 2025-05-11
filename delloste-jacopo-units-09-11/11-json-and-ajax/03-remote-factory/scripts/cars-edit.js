@@ -64,7 +64,7 @@ function setupEditForms() {
 
             const carsEndpoint = "https://jsonblob.com/api/jsonBlob/1370457368546172928";
 
-            request.open("PUT", carsEndpoint, true);
+            request.open("PUT", carsEndpoint);
 
             request.setRequestHeader("Content-Type", "application/json");
 
