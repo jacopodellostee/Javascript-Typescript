@@ -2,6 +2,7 @@
  * @file main.js
  * @author Jacopo Dell'Oste
  * 
+ * @description
  * This file processes an array of noise strings and generates
  * variations of each word by capitalizing one character at a time
  * and appending a growing number of exclamation marks. Each variation
