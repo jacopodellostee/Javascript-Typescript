@@ -113,11 +113,11 @@ testGroup.forEach(function(arr) {
 });
 
 console.log('\n==== Testing the function myForEach() ====');
-testGroup.forEach(function(arr) {
-    myForEach(arr, (num) => {
+myForEach(testGroup, (arr) => {
+        myForEach(arr, (num) => {
         console.log(num);
     });
-});
+})
 
 // map comparison
 console.log('==== Testing Array.map() method ====');
