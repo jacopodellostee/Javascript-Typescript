@@ -1,4 +1,4 @@
-# Digital Age
+# Digital Age (Optional)
 
 **Author**: Jacopo Dell'Oste 
 
@@ -48,7 +48,7 @@
 
 ### Solution Step-by-Step
 
-1. Create the  `` folder
+1. Create the classes `folder` because this directory contains the solution using ES6+ class syntax.
 
 2. Create the the `index.html` and `main.js` files in the appropriate directories
 

@@ -49,7 +49,7 @@
 
 ### Solution Step-by-Step
 
-1. Create the  `` folder
+1. Create the `prototype` folder, because this directory contain the solution using `Array.prototype`
 
 2. Create the the `index.html` and `main.js` files in the appropriate directories
 
