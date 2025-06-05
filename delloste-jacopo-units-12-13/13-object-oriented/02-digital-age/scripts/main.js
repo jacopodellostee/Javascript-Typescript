@@ -64,7 +64,7 @@ function MusicVideo(title, seconds, artist) {
 
     Video.call(this, title, seconds);
 
-    this.artist = artist || "Nobody";
+    this.artist = artist || "Unknown Artist";
 }
 
 MusicVideo.prototype = Object.create(Video.prototype);
