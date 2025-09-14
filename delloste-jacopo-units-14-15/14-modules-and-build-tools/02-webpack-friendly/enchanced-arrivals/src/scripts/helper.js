@@ -1,3 +1,22 @@
+/**
+ * @file helper.js
+ * @author Jacopo Dell'Oste
+ * 
+ * @description
+ * This module simulates a dynamic arrivals and departures board. It manages a list of flights,
+ * periodically generating new entries and updating their status over time (DEPARTING, ON_TIME, DELAYED, ARRIVED).
+ * Users can view detailed flight information on hover, and toggle a popup showing currently departing flights.
+ */
+
+/**
+ * Main arrivals object handling flights and UI updates.
+ * @namespace
+ * @property {HTMLElement} flightTable - Table body where flight rows are inserted.
+ * @property {Flight[]} flights - Array storing current flight data.
+ * @property {number} flightId - Unique identifier incrementer for flights.
+ * @property {string[]} origins - Array of possible origin cities.
+ * @property {HTMLElement} departures - The "Departures" button element.
+ */
 const arrivals = {
   /**
    * Table body where flight rows are inserted.
@@ -29,15 +48,28 @@ const arrivals = {
    */
   departures: document.getElementById("departures"),
 
+  /**
+   * Returns a random city from the origins array.
+   * @returns {string} A random origin city.
+   */
   getRandomOrigin() {
     return this.origins[Math.floor(Math.random() * this.origins.length)];
   },
 
+  /**
+   * Returns the current time as a formatted string (HH:MM).
+   * @returns {string} Formatted current time.
+   */
   getCurrentTimeStr() {
     let date = new Date();
     return date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
   },
 
+  /**
+   * Advances a flight's status based on how long it has existed.
+   * @param {Object} flight - The flight object to update.
+   * @returns {void}
+   */
   advanceFlightStatus(flight) {
     const now = Date.now();
     const elapsed = (now - flight.createdAt) / 1000;
@@ -63,6 +95,12 @@ const arrivals = {
     }
   },
 
+  /**
+   * Displays an extra row with detailed flight information.
+   * @param {HTMLTableRowElement} tr - The table row to show details for.
+   * @param {Object} flight - The flight object with data.
+   * @returns {void}
+   */
   showFlightDetails(tr, flight) {
     if (tr.nextSibling && tr.nextSibling.classList?.contains("flightDisplayedRow")) return;
 
@@ -86,12 +124,21 @@ const arrivals = {
     tr.parentNode.insertBefore(row, tr.nextSibling);
   },
 
+  /**
+   * Removes the flight detail row if it exists.
+   * @param {HTMLTableRowElement} tr - The table row to hide details for.
+   * @returns {void}
+   */
   hideFlightDetails(tr) {
     if (tr.nextSibling && tr.nextSibling.classList?.contains("flightDisplayedRow")) {
       tr.nextSibling.remove();
     }
   },
 
+  /**
+   * Toggles a popup showing currently departing flights.
+   * @returns {void}
+   */
   departuresFlights() {
     const popup = document.getElementById("departingPopup");
 
@@ -119,10 +166,18 @@ const arrivals = {
     popup.classList.add("show");
   },
 
+  /**
+   * Updates the flight table:
+   * - Removes flights that arrived over 60 seconds ago.
+   * - Advances statuses of all flights.
+   * - Sorts flights by scheduled time.
+   * - Renders the flight rows and binds hover events.
+   * @returns {void}
+   */
   updateTable() {
     const now = Date.now();
 
-    // Rimuove i voli arrivati da più di 60 secondi
+    // Remove flights that have arrived more than 60s ago
     this.flights = this.flights.filter(f => !(f.status === 'ARRIVED' && now - f.arrivedAt > 60000));
 
     this.flights.forEach(this.advanceFlightStatus);
@@ -149,6 +204,10 @@ const arrivals = {
     });
   },
 
+  /**
+   * Creates a new flight with randomized values and adds it to the list.
+   * @returns {void}
+   */
   createFlight() {
     const flight = {
       id: this.flightId++,

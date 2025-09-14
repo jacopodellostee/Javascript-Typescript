@@ -1,124 +1,160 @@
 @use 'scss-reset';
 
+$primary-color: #ff6600;
+$primary-hover-color: #e85c00;
+$text-color: #fff;
+$transition-speed: 0.3s;
+
 * {
   box-sizing: border-box;
 }
 
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    width: 100%;
-    background-color: #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    padding: 0.5rem;
-
-    .navbar-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-    }
-
-    .logo {
-        text-decoration: none;
-        color: #111;
-        font-size: 1.5rem;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
-
-    .tyler-nav {
-        ul {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-
-            li a {
-                text-decoration: none;
-                color: #333;
-                font-weight: 500;
-                font-size: 1rem;
-                padding: 0.25rem 0;
-                position: relative;
-                transition: color 0.3s ease;
-
-                &:after {
-                    content: '';
-                    position: absolute;
-                    left: 0;
-                    bottom: -4px;
-                    width: 0%;
-                    height: 2px;
-                    background-color: #ff6600;
-                    transition: width 0.3s ease;
-                }
-
-                &:hover {
-                    color: #ff6600;
-
-                    &::after {
-                        width: 100%;
-                    }
-                }
-            }
-        }
-    }
-
-    @media (max-width: 768px) {
-        padding: 1rem;
-        
-        .navbar-content {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-        
-        .tyler-nav ul {
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-    }
+body {
+  background-color: #1a1a1a; 
 }
 
-header {
+/* NAVBAR */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: #111;
+  padding: 0.75rem 1rem;
+
+  .navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .logo {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+
+    &:hover {
+      color: #ff6600;
+    }
+  }
+
+  .tyler-nav {
+    ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li a {
+        text-decoration: none;
+        color: #f0f0f0;
+        font-weight: 500;
+        font-size: 1rem;
+        position: relative;
+        transition: color 0.3s ease;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 0%;
+          height: 2px;
+          background: #ff6600;
+          transition: width 0.3s ease;
+        }
+
+        &:hover {
+          color: #ff6600;
+
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .tyler-nav {
+      display: none;
+
+      &.active {
+        display: block;
+        width: 100%;
+        ul {
+          flex-direction: column;
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    .nav-toggle {
+      display: block;
+    }
+  }
+}
+
+
+.hero {
   min-height: 100vh;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
-  background-image: url('../../static/images/tyler-hero-section.gif');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  color: #fff;
+  color: $text-color;
   text-align: center;
+  padding: 2rem;
+  overflow: hidden; 
 
   .hero-text {
+    position: relative;
+    z-index: 2;
     display: flex;
-    flex-direction: column-reverse;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 1.5rem;
 
     h1 {
       font-size: 3rem;
       font-weight: 700;
-      margin: 0;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     }
 
     h2 {
       font-size: 1.5rem;
       font-weight: 400;
       max-width: 600px;
-      margin: 0;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      margin: 0 auto;
+    }
+
+    .cta-btn {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: $primary-color;
+      color: $text-color;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background $transition-speed ease;
+
+      &:hover {
+        background: $primary-hover-color;
+      }
     }
   }
 
@@ -127,14 +163,12 @@ header {
       h1 {
         font-size: 2.2rem;
       }
-
       h2 {
         font-size: 1.2rem;
       }
     }
   }
 }
-
 
 .about-tyler {
   display: flex;
@@ -143,8 +177,8 @@ header {
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  margin: 2rem auto;
-  padding: 1rem;
+  padding: 2rem;
+  color: #f5f5f5;            
 
   .about-image {
     flex: 1 1 300px;
@@ -156,7 +190,6 @@ header {
       max-width: 400px;
       height: auto;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
   }
 
@@ -167,16 +200,17 @@ header {
       text-align: center;
       font-size: 2rem;
       margin-bottom: 1rem;
-    }
+      color: #ff6600; 
 
     p {
       text-align: justify;
       font-size: 1rem;
       line-height: 1.6;
-      padding: 1rem;
-      color: #333;
+      padding: 1rem 0;
+      color: #f5f5f5; 
     }
   }
+}
 }
 
 .tyler-albums {
@@ -185,11 +219,14 @@ header {
   align-items: center;
   padding: 2rem;
   flex-direction: column;
+  background-color: #1a1a1a; 
+  color: #f5f5f5;            
 
   h2 {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 1.5rem;
+    color: #ff6600; 
   }
 
   .albums-container {
@@ -210,14 +247,14 @@ header {
       font-size: 1.1rem;
 
       a.album-title {
-        color: #222;
+        color: #f5f5f5; 
         text-decoration: none;
         font-weight: bold;
         transition: color 0.2s ease;
 
         &:hover,
         &:focus {
-          color: #ff5c00; 
+          color: #ff6600; 
           text-decoration: underline;
         }
       }
@@ -225,11 +262,12 @@ header {
   }
 }
 
+
 .album-detail {
   display: none; 
   padding: 2rem;
-  background-color: #fafafa;
-  border-top: 1px solid #ddd;
+  background-color: #1a1a1a; 
+  color: #f5f5f5;           
 
   &.active {
     display: block;
@@ -280,11 +318,8 @@ header {
     .description {
       font-size: 1rem;
       line-height: 1.6;
-      color: #333;
+      color: #f5f5f5;
 
-      strong {
-        color: #000;
-      }
     }
 
     h3 {
@@ -309,7 +344,7 @@ header {
 }
 
 .site-footer {
-  background-color: #111;
+  background: #111;
   color: #f0f0f0;
   padding: 2rem 1.5rem 1rem;
   font-size: 0.95rem;
@@ -317,7 +352,6 @@ header {
   .footer-container {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
     flex-wrap: wrap;
     gap: 2rem;
     max-width: 1200px;
@@ -325,16 +359,14 @@ header {
     border-bottom: 1px solid #333;
     padding-bottom: 1rem;
 
-    .footer-logo {
-      a {
-        color: #fff;
-        font-size: 1.5rem;
-        font-weight: 700;
-        text-decoration: none;
+    .footer-logo a {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-decoration: none;
 
-        &:hover {
-          color: #ff6600;
-        }
+      &:hover {
+        color: #ff6600;
       }
     }
 
@@ -344,7 +376,6 @@ header {
       flex-wrap: wrap;
       list-style: none;
       padding: 0;
-      margin: 0;
 
       li a {
         color: #ccc;
@@ -362,9 +393,8 @@ header {
       gap: 1rem;
 
       a {
+        font-size: 1.3rem;
         color: #ccc;
-        text-decoration: none;
-        font-size: 0.95rem;
         transition: color 0.3s ease;
 
         &:hover {
@@ -386,11 +416,6 @@ header {
       flex-direction: column;
       align-items: center;
       text-align: center;
-
-      .footer-nav ul,
-      .footer-social {
-        justify-content: center;
-      }
     }
   }
 }

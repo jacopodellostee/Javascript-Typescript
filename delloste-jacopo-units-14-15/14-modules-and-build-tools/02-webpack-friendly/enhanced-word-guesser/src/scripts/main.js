@@ -1,19 +1,53 @@
-// main.js
+/**
+ * @file main.js
+ * @author Jacopo Dell'Oste
+ * 
+ * @description
+ * Entry point for the Hangman game UI. 
+ * It manages DOM elements, updates the display based on game state,
+ * handles user input for guesses, and initializes a new game.
+ */
 
 import game from './helper.js';
 
+// Import the styles
 import '../styles/style.css';
 
 // === DOM Elements ===
+
+/**
+ * Element displaying the current word progress (with underscores for unknown letters).
+ * @type {HTMLElement}
+ */
 const wordDisplay = document.querySelector(".word");
 
+/**
+ * Element displaying game results or messages.
+ * @type {HTMLElement}
+ */
 const resultDisplay = document.querySelector(".result");
 
+/**
+ * Image element showing the current hangman state.
+ * @type {HTMLImageElement}
+ */
 const hangmanDisplay = document.querySelector("#hangman-image");
 
+/**
+ * Input element where the player types their guesses.
+ * @type {HTMLInputElement}
+ */
 const input = document.getElementById("guess");
 
 // === UI Update Function ===
+
+/**
+ * Updates the game display:
+ * - Shows current guessed letters
+ * - Updates the hangman image
+ * - Displays result or remaining guesses/reward
+ * @returns {void}
+ */
 function updateDisplay() {
   wordDisplay.textContent = game.guess.join(" ");
   hangmanDisplay.src = `../../static/images/${game.hangmanState[game.hangmanIndex]}`;
@@ -30,6 +64,14 @@ function updateDisplay() {
 }
 
 // === Handle Input Guess ===
+
+/**
+ * Handles a player's letter guess:
+ * - Converts input to uppercase
+ * - Validates single-letter input
+ * - Updates game state and UI
+ * @returns {void}
+ */
 function handleGuess() {
   const letter = input.value.toUpperCase();
   input.value = "";
@@ -41,14 +83,20 @@ function handleGuess() {
   updateDisplay();
 }
 
-// === Game Init ===
+// === Game Initialization ===
+
+// Choose a new word for the game
 game.word = game.chooseWord();
 
+// Initialize guessed letters array
 game.guess = game.letterToGuess();
 
+// Initial display update
 updateDisplay();
 
 // === Event Listener ===
+
+// Listen for "Enter" key to submit guess
 input.addEventListener('keypress', e => {
   if (e.key === "Enter") handleGuess();
 });
