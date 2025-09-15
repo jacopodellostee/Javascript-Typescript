@@ -1,64 +1,175 @@
-@use 'scss-reset';
+/**
+ * style.scss
+ *
+ * This stylesheet defines the layout and styling for a Tyler, The Creator showcase site.  
+ * It uses SCSS features like variables, mixins, and nesting to create a bold,  
+ * music-themed design system. It includes navigation, hero, about, albums, and footer  
+ * sections, with responsive breakpoints and interactive hover effects.
+ *
+ * Key features:
+ * - Centralized design tokens (colors, spacing, typography, breakpoints).
+ * - Mixins for reusable transitions, shadows, gradient text, and hover effects.
+ * - Responsive layout adjustments for mobile, tablet, and desktop.
+ * - Section-specific styling with a cohesive aesthetic.
+ */
 
-$primary-color: #ff6600;
-$primary-hover-color: #e85c00;
-$text-color: #fff;
+// ===========================
+// VARIABLES
+// ===========================
+
+/* Color palette: bold pinks, blues, and golds */
+$primary-color: #f72585;           // Hot pink - signature bold style
+$primary-hover-color: #d00467;     // Darker pink for hover states
+$secondary-color: #4361ee;         // Electric blue for accents
+$accent-color: #ffd23f;            // Golden yellow for highlights
+
+/* Background colors */
+$bg-primary: #0d1b2a;             // Deep navy - main background
+$bg-secondary: #1b263b;           // Slightly lighter navy
+$bg-card: #212529;                // Dark gray for cards/sections
+
+/* Text colors */
+$text-primary: #ffffff;           // Pure white
+$text-secondary: #e9ecef;         // Light gray
+$text-muted: #adb5bd;             // Medium gray for subdued text
+$text-accent: $accent-color;      // Accent yellow for special emphasis
+
+/* UI colors */
+$border-color: #495057;           // Borders and dividers
+$shadow-color: rgba(0, 0, 0, 0.3); // Strong shadows
+$overlay-color: rgba(13, 27, 42, 0.8); // Dark overlay for depth
+
+/* Animation and transitions */
 $transition-speed: 0.3s;
+$transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
 
+/* Typography sizes */
+$font-size-xl: 3rem;
+$font-size-lg: 2rem;
+$font-size-md: 1.5rem;
+$font-size-base: 1rem;
+$font-size-sm: 0.95rem;
+$font-size-xs: 0.85rem;
+
+/* Spacing scale */
+$spacing-xs: 0.5rem;
+$spacing-sm: 0.75rem;
+$spacing-base: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+/* Breakpoints */
+$mobile: 768px;
+$tablet: 1024px;
+$desktop: 1200px;
+
+// ===========================
+// GLOBAL STYLES
+// ===========================
+
+/* Box model consistency */
 * {
   box-sizing: border-box;
 }
 
+/* Base body styles */
 body {
-  background-color: #1a1a1a; 
+  background-color: $bg-primary;
+  color: $text-primary;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
 }
 
-/* NAVBAR */
+// ===========================
+// MIXINS
+// ===========================
+
+/* Reusable transition with timing/easing */
+@mixin transition($properties...) {
+  transition: #{$properties} $transition-speed $transition-easing;
+}
+
+/* Hover effect: color change + slight lift */
+@mixin hover-effect($color: $primary-color) {
+  @include transition(color, transform);
+  
+  &:hover {
+    color: $color;
+    transform: translateY(-2px);
+  }
+}
+
+/* Depth shadow for cards */
+@mixin card-shadow {
+  box-shadow: 0 4px 12px $shadow-color, 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient-filled text */
+@mixin gradient-text {
+  background: linear-gradient(45deg, $primary-color, $secondary-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ===========================
+// NAVIGATION
+// ===========================
+
 .navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
   width: 100%;
-  background: #111;
-  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, $bg-secondary 0%, $bg-card 100%);
+  backdrop-filter: blur(10px);
+  padding: $spacing-sm $spacing-base;
+  border-bottom: 1px solid $border-color;
 
   .navbar-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: $desktop;
     margin: 0 auto;
     width: 100%;
   }
 
   .logo {
-    color: #fff;
+    color: $text-primary;
     font-size: 1.6rem;
-    font-weight: bold;
+    font-weight: 700;
     text-decoration: none;
     letter-spacing: 1px;
+    @include gradient-text;
+    @include transition(transform);
 
     &:hover {
-      color: #ff6600;
+      transform: scale(1.05);
     }
   }
 
+  /* Navigation links */
   .tyler-nav {
     ul {
       display: flex;
-      gap: 2rem;
+      gap: $spacing-lg;
       list-style: none;
       margin: 0;
       padding: 0;
 
       li a {
         text-decoration: none;
-        color: #f0f0f0;
+        color: $text-secondary;
         font-weight: 500;
-        font-size: 1rem;
+        font-size: $font-size-base;
         position: relative;
-        transition: color 0.3s ease;
+        @include transition(color);
 
+        /* Underline hover effect */
         &::after {
           content: "";
           position: absolute;
@@ -66,12 +177,12 @@ body {
           left: 0;
           width: 0%;
           height: 2px;
-          background: #ff6600;
-          transition: width 0.3s ease;
+          background: linear-gradient(90deg, $primary-color, $secondary-color);
+          @include transition(width);
         }
 
         &:hover {
-          color: #ff6600;
+          color: $primary-color;
 
           &::after {
             width: 100%;
@@ -81,26 +192,39 @@ body {
     }
   }
 
+  /* Hamburger menu (mobile only) */
   .nav-toggle {
     display: none;
     background: none;
     border: none;
     font-size: 1.8rem;
-    color: #fff;
+    color: $text-primary;
     cursor: pointer;
+    @include transition(color);
+
+    &:hover {
+      color: $primary-color;
+    }
   }
 
-  @media (max-width: 768px) {
+  /* Mobile breakpoint: collapsible nav */
+  @media (max-width: $mobile) {
     .tyler-nav {
       display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: $bg-card;
+      border-bottom: 1px solid $border-color;
 
       &.active {
         display: block;
-        width: 100%;
+        
         ul {
           flex-direction: column;
-          gap: 1rem;
-          margin-top: 1rem;
+          gap: $spacing-base;
+          padding: $spacing-base;
         }
       }
     }
@@ -111,6 +235,9 @@ body {
   }
 }
 
+// ===========================
+// HERO SECTION
+// ===========================
 
 .hero {
   min-height: 100vh;
@@ -118,57 +245,80 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $text-color;
+  color: $text-primary;
   text-align: center;
-  padding: 2rem;
-  overflow: hidden; 
+  padding: $spacing-lg;
+  overflow: hidden;
+  background: linear-gradient(135deg, $bg-primary 0%, $bg-secondary 50%, $bg-card 100%);
+
+  /* Overlay effect */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, $overlay-color 70%);
+    z-index: 1;
+  }
 
   .hero-text {
     position: relative;
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: $spacing-md;
 
     h1 {
-      font-size: 3rem;
+      font-size: $font-size-xl;
       font-weight: 700;
+      margin: 0;
+      @include gradient-text;
+      text-shadow: 0 2px 4px $shadow-color;
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: $font-size-md;
       font-weight: 400;
       max-width: 600px;
       margin: 0 auto;
+      color: $text-secondary;
     }
 
     .cta-btn {
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background: $primary-color;
-      color: $text-color;
+      margin-top: $spacing-base;
+      padding: $spacing-sm $spacing-md;
+      background: linear-gradient(45deg, $primary-color, $secondary-color);
+      color: $text-primary;
       text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      transition: background $transition-speed ease;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      align-self: center;
+      @include transition(all);
+      @include card-shadow;
 
       &:hover {
-        background: $primary-hover-color;
+        background: linear-gradient(45deg, $primary-hover-color, $primary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba($primary-color, 0.4);
       }
     }
   }
 
-  @media (max-width: 768px) {
+  /* Mobile scaling */
+  @media (max-width: $mobile) {
     .hero-text {
-      h1 {
-        font-size: 2.2rem;
-      }
-      h2 {
-        font-size: 1.2rem;
-      }
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.2rem; }
     }
   }
 }
+
+// ===========================
+// ABOUT SECTION
+// ===========================
 
 .about-tyler {
   display: flex;
@@ -176,9 +326,10 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
-  padding: 2rem;
-  color: #f5f5f5;            
+  gap: $spacing-lg;
+  padding: $spacing-xl $spacing-lg;
+  background: $bg-secondary;
+  color: $text-primary;
 
   .about-image {
     flex: 1 1 300px;
@@ -189,7 +340,13 @@ body {
       width: 100%;
       max-width: 400px;
       height: auto;
-      border-radius: 12px;
+      border-radius: 16px;
+      @include card-shadow;
+      @include transition(transform);
+
+      &:hover {
+        transform: scale(1.02);
+      }
     }
   }
 
@@ -198,35 +355,39 @@ body {
 
     h2 {
       text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #ff6600; 
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-base;
+      @include gradient-text;
+    }
 
     p {
       text-align: justify;
-      font-size: 1rem;
-      line-height: 1.6;
-      padding: 1rem 0;
-      color: #f5f5f5; 
+      font-size: $font-size-base;
+      line-height: 1.7;
+      padding: $spacing-base 0;
+      color: $text-secondary;
     }
   }
 }
-}
+
+// ===========================
+// ALBUMS SECTION
+// ===========================
 
 .tyler-albums {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: $spacing-xl $spacing-lg;
   flex-direction: column;
-  background-color: #1a1a1a; 
-  color: #f5f5f5;            
+  background: $bg-primary;
+  color: $text-primary;
 
   h2 {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #ff6600; 
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-md;
+    @include gradient-text;
   }
 
   .albums-container {
@@ -240,34 +401,38 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: $spacing-sm;
 
     li {
       text-align: center;
       font-size: 1.1rem;
+      padding: $spacing-xs;
+      border-radius: 8px;
+      @include transition(background-color);
+
+      &:hover {
+        background-color: rgba($primary-color, 0.1);
+      }
 
       a.album-title {
-        color: #f5f5f5; 
+        color: $text-secondary;
         text-decoration: none;
-        font-weight: bold;
-        transition: color 0.2s ease;
-
-        &:hover,
-        &:focus {
-          color: #ff6600; 
-          text-decoration: underline;
-        }
+        font-weight: 600;
+        @include hover-effect($accent-color);
       }
     }
   }
 }
 
+// ===========================
+// ALBUM DETAILS
+// ===========================
 
 .album-detail {
-  display: none; 
-  padding: 2rem;
-  background-color: #1a1a1a; 
-  color: #f5f5f5;           
+  display: none;
+  padding: $spacing-xl $spacing-lg;
+  background: $bg-secondary;
+  color: $text-primary;
 
   &.active {
     display: block;
@@ -276,11 +441,11 @@ body {
   .album-detail-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: $spacing-lg;
     max-width: 1000px;
     margin: 0 auto;
 
-    @media (min-width: 768px) {
+    @media (min-width: $mobile) {
       flex-direction: row;
       align-items: flex-start;
     }
@@ -293,8 +458,13 @@ body {
     img {
       max-width: 100%;
       height: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      border-radius: 16px;
+      @include card-shadow;
+      @include transition(transform);
+
+      &:hover {
+        transform: scale(1.03);
+      }
     }
   }
 
@@ -302,103 +472,130 @@ body {
     flex: 2;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: $spacing-base;
 
     h2 {
-      font-size: 2rem;
+      font-size: $font-size-lg;
       margin: 0;
+      @include gradient-text;
     }
 
     .year {
-      font-size: 1rem;
-      color: #888;
+      font-size: $font-size-base;
+      color: $text-muted;
       font-style: italic;
+      font-weight: 500;
     }
 
     .description {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #f5f5f5;
+      font-size: $font-size-base;
+      line-height: 1.7;
+      color: $text-secondary;
 
+      strong {
+        color: $accent-color;
+        font-weight: 600;
+      }
+
+      em {
+        color: $primary-color;
+        font-style: normal;
+        font-weight: 500;
+      }
     }
 
     h3 {
-      font-size: 1.5rem;
-      margin-top: 1rem;
-      border-bottom: 2px solid #ff5c00;
+      font-size: $font-size-md;
+      margin-top: $spacing-base;
+      border-bottom: 3px solid $primary-color;
+      background: linear-gradient(90deg, $primary-color, $secondary-color);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       padding-bottom: 0.25rem;
       width: fit-content;
     }
 
     .tracklist {
-      padding-left: 1.5rem;
+      padding-left: $spacing-md;
       list-style-type: decimal;
-      font-size: 1rem;
-      line-height: 1.5;
+      font-size: $font-size-base;
+      line-height: 1.6;
 
       li {
-        margin-bottom: 0.5rem;
+        margin-bottom: $spacing-xs;
+        color: $text-secondary;
+        @include transition(color);
+
+        &:hover {
+          color: $accent-color;
+        }
       }
     }
   }
 }
 
+// ===========================
+// FOOTER
+// ===========================
+
 .site-footer {
-  background: #111;
-  color: #f0f0f0;
-  padding: 2rem 1.5rem 1rem;
-  font-size: 0.95rem;
+  background: linear-gradient(135deg, $bg-card 0%, $bg-secondary 100%);
+  color: $text-secondary;
+  padding: $spacing-lg $spacing-md $spacing-base;
+  font-size: $font-size-sm;
+  border-top: 1px solid $border-color;
 
   .footer-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 2rem;
-    max-width: 1200px;
+    gap: $spacing-lg;
+    max-width: $desktop;
     margin: 0 auto;
-    border-bottom: 1px solid #333;
-    padding-bottom: 1rem;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: $spacing-base;
 
     .footer-logo a {
-      color: #fff;
-      font-size: 1.5rem;
+      color: $text-primary;
+      font-size: $font-size-md;
       font-weight: 700;
       text-decoration: none;
+      @include gradient-text;
+      @include transition(transform);
 
       &:hover {
-        color: #ff6600;
+        transform: scale(1.05);
       }
     }
 
     .footer-nav ul {
       display: flex;
-      gap: 1.5rem;
+      gap: $spacing-md;
       flex-wrap: wrap;
       list-style: none;
       padding: 0;
+      margin: 0;
 
       li a {
-        color: #ccc;
+        color: $text-muted;
         text-decoration: none;
-        transition: color 0.3s ease;
-
-        &:hover {
-          color: #ff6600;
-        }
+        @include hover-effect($accent-color);
       }
     }
 
     .footer-social {
       display: flex;
-      gap: 1rem;
+      gap: $spacing-base;
 
       a {
         font-size: 1.3rem;
-        color: #ccc;
-        transition: color 0.3s ease;
+        color: $text-muted;
+        @include transition(color, transform);
 
         &:hover {
-          color: #ff6600;
+          color: $primary-color;
+          transform: scale(1.2);
         }
       }
     }
@@ -406,12 +603,12 @@ body {
 
   .footer-bottom {
     text-align: center;
-    margin-top: 1rem;
-    color: #777;
-    font-size: 0.85rem;
+    margin-top: $spacing-base;
+    color: $text-muted;
+    font-size: $font-size-xs;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $mobile) {
     .footer-container {
       flex-direction: column;
       align-items: center;

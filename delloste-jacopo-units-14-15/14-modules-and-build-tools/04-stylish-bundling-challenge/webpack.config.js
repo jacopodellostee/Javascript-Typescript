@@ -46,7 +46,7 @@ module.exports = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 50 * 1024 // 50KB - inline if smaller, emit as file if larger
+            maxSize: 50 * 1024 
           }
         },
         generator: {
