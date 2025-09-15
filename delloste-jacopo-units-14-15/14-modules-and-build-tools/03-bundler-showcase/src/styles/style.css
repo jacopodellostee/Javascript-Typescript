@@ -1,41 +1,73 @@
+/**
+ * style.css
+ *
+ * This stylesheet defines the layout and styling for the "Dad's Joke Generator"
+ * application. It includes global resets, a gradient background, a card container,
+ * styled headings, supporting text, and an interactive button. Animations provide
+ * a smooth fade-in effect and hover feedback for interactivity.
+ */
+
+/* -----------------------------
+   Typography & Reset
+----------------------------- */
+
+/* Import Google Fonts for consistent modern typography */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
+/* Reset default browser styles and apply box model consistency */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* -----------------------------
+   Layout & Background
+----------------------------- */
+
+/* Base body styling with centered content */
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-  display: flex;
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec); /* Soft gradient background */
+  display: flex; /* Flexbox for perfect centering */
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100vh; /* Fill entire viewport */
   padding: 1rem;
 }
 
+/* -----------------------------
+   Card Component
+----------------------------- */
+
+/* Main container for the app */
 .card {
   max-width: 400px;
   width: 100%;
   background-color: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* Depth effect */
   overflow: hidden;
-  animation: fadeIn 0.4s ease-in-out;
+  animation: fadeIn 0.4s ease-in-out; /* Smooth entrance */
   transition: transform 0.2s ease-in-out;
 }
 
+/* Slight lift effect when hovering the card */
 .card:hover {
   transform: translateY(-4px);
 }
 
+/* Inner padding and content alignment */
 .card-body {
   padding: 2rem;
   text-align: center;
 }
 
+/* -----------------------------
+   Text Elements
+----------------------------- */
+
+/* Main title (h1): "Dad's Joke Generator" */
 .card-title {
   margin-top: 1.5rem;
   text-align: center;
@@ -45,38 +77,57 @@ body {
   margin-bottom: 1rem;
 }
 
+/* Joke text (h2) */
 .card-text {
   font-size: 1.1rem;
   color: #495057;
   margin-bottom: 1.25rem;
-  min-height: 60px;
+  min-height: 60px; /* Keeps space reserved even before joke loads */
 }
 
+/* Supporting text (p): disclaimer below the joke */
 p {
   font-size: 0.875rem;
   color: #868e96;
   margin-bottom: 1.5rem;
 }
 
+/* -----------------------------
+   Interactive Elements
+----------------------------- */
+
+/* Button (a#btnJoke): "Generate Joke" */
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   font-weight: 500;
   color: #fff;
-  background-color: #0d6efd;
+  background-color: #0d6efd; /* Primary blue */
   border-radius: 8px;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out, transform 0.2s;
 }
 
+/* Hover effect: darker shade + scale */
 .btn:hover {
   background-color: #0b5ed7;
   transform: scale(1.05);
 }
 
+/* -----------------------------
+   Animations
+----------------------------- */
+
+/* Fade-in animation for initial card appearance */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); /* Starts slightly lower */
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); /* Settles into place */
+  }
 }
