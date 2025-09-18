@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file main.js
+ * @author Jacopo Dell'Oste
+ * 
+ * @description
+ * This script validates credit card numbers based on specific rules and prints the results
+ * in a formatted way. A credit card is considered valid if:
+ * - It contains only digits and has exactly 16 characters.
+ * - Its last digit is even.
+ * - The sum of its digits is greater than 16.
+ * - It contains at least two different unique digits.
+ *
+ * Functions:
+ * - `validateCreditCard`: Validates a single credit card string asynchronously.
+ * - `printResult`: Prints a formatted validation result to the console.
+ * - `validateMultipleCards`: Validates multiple cards in parallel.
+ * - `main`: Demonstrates validation with a set of test card numbers.
+ */
+
+/**
+ * Validation rules constants.
+ * @readonly
+ * @enum {number}
+ */
+const VALIDATION_RULES = {
+  REQUIRED_LENGTH: 16,
+  MIN_SUM: 16,
+  MIN_UNIQUE_DIGITS: 2
+};
+
+/**
+ * Human-readable error messages.
+ * @readonly
+ * @enum {string}
+ */
+const ERROR_MESSAGES = {
+  invalid_characters: 'invalid characters',
+  final_digit_not_even: 'odd final number', 
+  sum_not_greater_16: 'sum less than 16',
+  only_one_digit: 'only one type of number',
+  wrong_length: 'wrong length'
+};
+
+/**
+ * Validates a credit card number based on predefined rules.
+ *
+ * @async
+ * @param {string} [creditCard=''] - The credit card number to validate (dashes allowed).
+ * @returns {Promise&lt;Object>} Validation result object:
+ * - {boolean} valid - Whether the card is valid.
+ * - {string} number - The original credit card number.
+ * - {string} [error] - The error code if invalid.
+ * - {string} [details] - Extra error details in case of unexpected error.
+ */
+const validateCreditCard = async (creditCard = '') => {
+
+  const normalizedCard = creditCard?.replace(/-/g, '') ?? '';
+
+  const { REQUIRED_LENGTH, MIN_SUM, MIN_UNIQUE_DIGITS } = VALIDATION_RULES;
+
+  let result = { 
+    valid: true, 
+    number: creditCard 
+  };
+
+  try {
+
+    const isValidFormat = /^\d{16}$/gm.test(normalizedCard);
+
+    if (!isValidFormat) {
+
+      const error = normalizedCard.length !== REQUIRED_LENGTH ? 'wrong_length' : 'invalid_characters';
+
+      return { ...result, valid: false, error };
+    }
+
+    const digits = [...normalizedCard].map(digit => parseInt(digit, 10));
+
+    const lastDigit = digits?.[digits.length - 1] ?? 0;
+
+    if (lastDigit % 2 !== 0) {
+      return { ...result, valid: false, error: 'final_digit_not_even' };
+    }
+
+    const sum = digits.reduce((acc, digit) => acc + digit, 0);
+
+    if (sum &lt;= MIN_SUM) {
+      return { ...result, valid: false, error: 'sum_not_greater_16' };
+    }
+
+    const uniqueDigits = new Set(digits);
+
+    if (uniqueDigits.size &lt; MIN_UNIQUE_DIGITS) {
+      return { ...result, valid: false, error: 'only_one_digit' };
+    }
+
+    return result;
+
+  } catch (error) {
+
+    return { 
+      ...result, 
+      valid: false, 
+      error: 'validation_error',
+      details: error?.message ?? 'Unknown error'
+    };
+  }
+};
+
+/**
+ * Prints the validation result in a formatted box style.
+ *
+ * @param {Object} [result={}] - Validation result object.
+ * @param {boolean} result.valid - Whether the card is valid.
+ * @param {string} result.number - The original credit card number.
+ * @param {string} [result.error] - Error code if invalid.
+ * @param {string} [result.details] - Extra error details if any.
+ * @param {Object} [options={}] - Printing options.
+ * @param {string} [options.borderChar='='] - Character used for the border.
+ * @param {number} [options.width=32] - Width of the box.
+ * @returns {void}
+ */
+const printResult = ({ valid, number, error, details } = {}, { borderChar = '=', width = 32 } = {}) => {
+
+  const border = borderChar.repeat(width);
+
+  const formatLine = (label, value) => {
+
+    const content = `${label} : ${value}`;
+
+    const padding = width - content.length - 4;
+
+    return `${borderChar} ${content}${' '.repeat(Math.max(0, padding))} ${borderChar}`;
+  };
+
+  console.log(border);
+
+  console.log(formatLine('number', number ?? 'N/A'));
+
+  console.log(formatLine('valid', valid ?? false));
+
+  if (!valid &amp;&amp; error) {
+    const errorMessage = ERROR_MESSAGES[error] ?? error;
+    console.log(formatLine('error', errorMessage));
+  }
+
+  if (details) {
+    console.log(formatLine('details', details));
+  }
+
+  console.log(border);
+};
+
+/**
+ * Validates multiple credit cards asynchronously in parallel.
+ *
+ * @async
+ * @param {string[]} [creditCards=[]] - Array of credit card numbers.
+ * @returns {Promise&lt;Object[]>} Array of validation result objects.
+ */
+const validateMultipleCards = async (creditCards = []) => {
+  const validations = creditCards.map(card => validateCreditCard(card));
+  return await Promise.all(validations);
+};
+
+/**
+ * Main function demonstrating validation of several test credit card numbers.
+ *
+ * @async
+ * @returns {Promise&lt;void>} Resolves when done.
+ */
+async function main () {
+  const testCards = [
+    '9999-9999-8888-0000',
+    '9169-9239-4458-9712', 
+    'a923-3211-9c01-1112',
+    '6666-6666-6666-6661',
+    '1111-1111-1111-1110',
+    '4444-4444-4444-4444',
+    '6666-6666-6666-1666'
+  ];
+
+  try {
+    const results = await validateMultipleCards(testCards);
+    results.forEach(result => {
+      printResult(result);
+    });
+  } catch (error) {
+    console.error('Validation failed:', error?.message ?? 'Unknown error');
+  }
+};
+
+main();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ERROR_MESSAGES">ERROR_MESSAGES</a></li><li><a href="global.html#VALIDATION_RULES">VALIDATION_RULES</a></li><li><a href="global.html#main">main</a></li><li><a href="global.html#printResult">printResult</a></li><li><a href="global.html#validateCreditCard">validateCreditCard</a></li><li><a href="global.html#validateMultipleCards">validateMultipleCards</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Thu Sep 18 2025 11:18:09 GMT+0200 (Ora legale dell’Europa centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
