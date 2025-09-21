@@ -1,4 +1,4 @@
-# Enhanced Arrivals - Reduce All
+# Greatest Hits - Enhanced Arrivals
 
 **Author**: Jacopo Dell'Oste
 

@@ -28,7 +28,7 @@
 
 1.  **Webpack Project Setup**
   
-Create a new folder `enchanced-arrivals` inside `02-webpack-friendly`.
+Create a new folder `credit-card-validator`.
   
 Initialize a new Node.js project 
   

@@ -28,7 +28,7 @@
 
 1.  **Webpack Project Setup**
   
-Create a new folder `enchanced-arrivals` inside `02-webpack-friendly`.
+Create a new folder `enchanced-arrivals`.
   
 Initialize a new Node.js project 
   
